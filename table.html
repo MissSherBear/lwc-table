@@ -1,0 +1,27 @@
+<template>
+    <table class="slds-table">
+        <thead class="slds-text-title_caps">
+            <th>Work Log Name</th>
+            <th>Assigned Resource</th>
+            <th>Finance Line</th>
+            <th>Claimed QTY</th>
+            <th>Unbillable</th>
+            <th>Work Date</th>
+            <th>Notes/Comments</th>
+        </thead>
+        <tbody>
+            <template for:each={createdWorkLogs} for:item="workLog">
+                <tr key={workLog.Id}>
+                    <td><a href=#>{workLog.Name}</a></td>
+                    <td>{workLog.Assigned_Resource__c}</td>
+                    <td><a href=#>{workLog.Finance__c}</a></td>
+                    <td>{workLog.Claimed_QTY__c}</td>
+                    <!-- If Unbillable = true, display <lightning-icon icon-name="utility:success" variant="success" size="small"></lightning-icon> --> 
+                    <td><div style="width:fit-content"><lightning-input type="checkbox" label="Checkbox" name="unbillable" data-id={workLog.Finance__c} variant="label-hidden" checked={workLog.Unbillable__c} disabled></lightning-input></div></td>
+                    <td><lightning-formatted-date-time value={workLog.Work_Date__c} year="numeric" month="numeric" day="numeric"></lightning-formatted-date-time></td>
+                    <td>{workLog.Notes_Comments__c}</td>
+                </tr>
+            </template>
+        </tbody>
+    </table>  
+</template>
